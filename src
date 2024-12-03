@@ -1,0 +1,27 @@
+create database lojadeeletronicos;
+USE lojadeeletronicos;
+create table produtos2 (
+id_produto int auto_increment primary key,
+nome int not null,
+preco decimal(10,2),
+estoque int
+);
+create table fornecedores (
+id_fornecedor int auto_increment primary key,
+nome int not null,
+contato int not null,
+foreign key (id_fornecedor) references fornecedores (id_fornecedor)
+);
+create table compras (
+id_compra int auto_increment primary key,
+id_fornecedor int not null,
+data_compra datetime,
+foreign key (id_compra) references compra (id_compra)
+);
+create table itens (
+id_item int auto_increment primary key,
+id_compra int not null,
+id_produto int not null,
+quantidade int not null,
+foreign key (id_item) references item (id_tem)
+);
