@@ -1,27 +1,31 @@
-create database lojadeeletronicos;
+CREATE DATABASE lojadeeletronicos;
 USE lojadeeletronicos;
-create table produtos2 (
-id_produto int auto_increment primary key,
-nome int not null,
-preco decimal(10,2),
-estoque int
+
+CREATE TABLE produtos (
+    id_produto INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    preco DECIMAL(10, 2) NOT NULL,
+    estoque INT DEFAULT 0
 );
-create table fornecedores (
-id_fornecedor int auto_increment primary key,
-nome int not null,
-contato int not null,
-foreign key (id_fornecedor) references fornecedores (id_fornecedor)
+
+CREATE TABLE fornecedores (
+    id_fornecedor INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    contato VARCHAR(50) NOT NULL
 );
-create table compras (
-id_compra int auto_increment primary key,
-id_fornecedor int not null,
-data_compra datetime,
-foreign key (id_compra) references compra (id_compra)
+
+CREATE TABLE compras (
+    id_compra INT AUTO_INCREMENT PRIMARY KEY,
+    id_fornecedor INT NOT NULL,
+    data_compra DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_fornecedor) REFERENCES fornecedores(id_fornecedor)
 );
-create table itens (
-id_item int auto_increment primary key,
-id_compra int not null,
-id_produto int not null,
-quantidade int not null,
-foreign key (id_item) references item (id_tem)
+
+CREATE TABLE itens_compra (
+    id_item INT AUTO_INCREMENT PRIMARY KEY,
+    id_compra INT NOT NULL,
+    id_produto INT NOT NULL,
+    quantidade INT NOT NULL,
+    FOREIGN KEY (id_compra) REFERENCES compras(id_compra),
+    FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
 );
